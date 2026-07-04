@@ -49,9 +49,13 @@ area = st.number_input(
 # -----------------------------------
 if st.button("Predict Insurance Purchase"):
 
-    prediction = model.predict([[Age]])
+    prediction = model.predict([[age]])
+    if prediction[0]==0:
+        result='No'
+    else:
+        result='Yes'
 
-    st.success(f"Predicted Age: {prediction[0]:,.2f}")
+    st.success(f"Predicted Insurance Purchase: {result}")
 
 # -----------------------------------
 # Model Information
