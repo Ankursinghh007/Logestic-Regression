@@ -7,13 +7,13 @@ from sklearn.model_selection import train_test_split
 # Page Configuration
 # -----------------------------------
 st.set_page_config(
-    page_title="Insurance Prediction",
+    page_title="Insurance Sales Prediction",
     page_icon="🏠",
     layout="centered"
 )
 
 st.title("🏠 Insurance Sale Prediction")
-st.write("Predict Sale using Logistic Regression")
+st.write("Predict Insurance Sale using Logistic Regression")
 
 # -----------------------------------
 # Load Dataset
@@ -36,7 +36,7 @@ model.fit(X_train, y_train)
 # -----------------------------------
 st.subheader("Enter Age of person")
 
-area = st.number_input(
+age = st.number_input(
     "Age (in Years)",
     min_value=10,
     max_value=65,
