@@ -1,0 +1,61 @@
+
+import streamlit as st
+import pandas as pd
+from sklearn.linear_model import LogisticRegression
+# -----------------------------------
+# Page Configuration
+# -----------------------------------
+st.set_page_config(
+    page_title="Insurance Prediction",
+    page_icon="🏠",
+    layout="centered"
+)
+
+st.title("🏠 Insurance Sale Prediction")
+st.write("Predict Sale using Logistic Regression")
+
+# -----------------------------------
+# Load Dataset
+# -----------------------------------
+df = pd.read_csv("insurance_data.csv")
+
+st.subheader("Insurance Dataset")
+st.dataframe(df)
+
+# -----------------------------------
+# Train Model
+# -----------------------------------
+X_train, X_test, y_train, y_test = train_test_split(df[['age']],df.bought_insurance,train_size=0.8)
+
+model = LogisticRegression()
+
+model.fit(X_train, y_train)
+# -----------------------------------
+# User Input
+# -----------------------------------
+st.subheader("Enter Age of person")
+
+area = st.number_input(
+    "Age (in Years)",
+    min_value=10,
+    max_value=65,
+    value=18,
+    step=1
+)
+
+# -----------------------------------
+# Prediction
+# -----------------------------------
+if st.button("Predict Insurance Purchase"):
+
+    prediction = model.predict([[Age]])
+
+    st.success(f"Predicted Age: {prediction[0]:,.2f}")
+
+# -----------------------------------
+# Model Information
+# -----------------------------------
+st.subheader("Model Details")
+
+st.write("Coefficient:", model.coef_[0])
+st.write("Intercept:", model.intercept_)
